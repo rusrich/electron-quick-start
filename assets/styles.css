@@ -1,0 +1,1045 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+    background: rgb(0, 0, 0)
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+        margin: 30px auto 0
+    }
+
+    to {
+        opacity: 1;
+        margin: 30px auto 0
+    }
+}
+
+@keyframes fadeinline {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes scalein {
+    from {
+        transform: scale(0.2)
+    }
+
+    50% {
+        transform: scale(1.5)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+
+@keyframes scaleinindex {
+    from {
+        transform: scale(0)
+    }
+
+    10% {
+        transform: scale(1.5)
+    }
+
+    20% {
+        transform: scale(1);
+        margin-left: 45px;
+    }
+
+    90% {
+        transform: scale(1);
+        margin-left: 45px;
+    }
+
+    100% {
+        transform: scale(0.8);
+        margin-left: 0;
+    }
+}
+
+@keyframes mainStreet {
+    from {
+        margin-top: 240px;
+    }
+
+    to {
+        margin-top: 0px;
+    }
+}
+
+@keyframes firstStreet {
+    from {
+        margin-top: 200px;
+    }
+
+    to {
+        margin-top: 1px;
+    }
+}
+
+@keyframes secondStreet {
+    from {
+        margin-top: 100px;
+    }
+
+    to {
+        margin-top: 1px;
+    }
+}
+
+#player {
+    position: absolute;
+    /* visibility: hidden; */
+    left: 0;
+    /* background: #000; */
+    /* max-width: 570px;
+    max-height: 320px; */
+    border: 0;
+    margin: 0;
+    padding: 0;
+    z-index: 2;
+    border-radius: 15px;
+}
+
+video {
+    border-radius: 15px;
+    filter: drop-shadow(0 2mm 4mm rgb(0, 0, 0));
+}
+
+#info {
+    position: absolute;
+    left: 646px;
+    width: 250px;
+    height: 640px;
+    background: rgb(0, 0, 0);
+    z-index: 1;
+    overflow: hidden;
+}
+
+#traffic {
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    /* height: 400px */
+}
+
+#traffic-index {
+    display: flex;
+    /* background: rgb(65, 160, 10); */
+    width: 125px;
+    height: 125px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    margin: 30px 64px 0;
+    align-items: center;
+    justify-content: center;
+    animation: scaleinindex 5s 1 ease-out forwards;
+    z-index: 999;
+}
+
+#traffic-index-number {
+    /* transform: scale(0.2); */
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    font-weight: bold;
+    animation: fadeinline 0.75s 1 ease-out forwards;
+    animation-delay: 0.25s;
+    z-index: 1000;
+}
+
+#traffic-line {
+    display: absolute;
+    width: 100%;
+    margin: -60px auto 0;
+    align-items: center;
+    justify-content: center;
+    /* border-bottom: 1px solid #fff; */
+    z-index: -999;
+    opacity: 0;
+    /* animation-name: fadeinline; */
+    /* animation-duration: 1s; */
+    /* animation-timing-function: ease-out; */
+    animation: fadeinline 1.5s 1 ease-out forwards;
+    animation-delay: 1s;
+}
+
+#traffic-line-street {
+    display: flex;
+    width: 100%;
+    margin: 50px auto 0;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #fff;
+}
+
+#traffic-speed-text {
+    transform: scale(0);
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 90px;
+    font-weight: 300;
+    animation: scalein 0.75s 1 ease-out forwards;
+    animation-delay: 0.5s;
+}
+
+#traffic-speed {
+    transform: scale(0);
+    display: flex;
+    margin: 10px auto 0;
+    align-items: center;
+    justify-content: center;
+    font-size: 7rem;
+    font-weight: bold;
+    animation: scalein 0.75s 1 ease-out forwards;
+    animation-delay: 0.75s;
+}
+
+#speed-block {
+    height: 440px;
+    border-radius: 15px;
+}
+
+#traffic-speed-km {
+    transform: scale(0);
+    text-transform: uppercase;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 300;
+    margin-top: -10px;
+    animation: scalein 0.75s 1 ease-out forwards;
+    animation-delay: 1s;
+    /* padding-bottom: 30px; */
+}
+
+#traffic-main-street {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+    font-weight: 500;
+    margin-top: 240px;
+    /* margin-top: 240px; */
+    /* border-bottom: 1px solid #fff;
+    border-top: 1px solid #fff; */
+    /* border-radius: 10px; */
+    animation: mainStreet 0.75s 1 ease forwards;
+    animation-delay: 1.25s;
+}
+
+#traffic-main-street-first {
+    /* margin-top: 4px; */
+    margin-bottom: 5px;
+    background: rgb(66, 66, 66);
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+    font-weight: 500;
+    border-radius: 15px;
+    /* border-bottom: 1px solid #fff; */
+    /* border-radius: 10px; */
+    animation: firstStreet 0.75s 1 ease forwards;
+    animation-delay: 1.35s;
+}
+
+#traffic-main-street-second {
+    margin-top: 4px;
+    background: rgb(1, 115, 209);
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+    font-weight: 500;
+    border-radius: 15px;
+    /* border-bottom: 1px solid #fff; */
+    /* border-radius: 10px; */
+    animation: secondStreet 0.75s 1 ease forwards;
+    animation-delay: 1.45s;
+}
+
+.green {
+    background: #05c46b;
+    background: linear-gradient(0deg, rgba(18,152,0,1) 0%, rgba(69,172,16,1) 48%, rgba(44,214,0,1) 100%);
+
+}
+
+.yellowgreen {
+    background: #afce03;
+    background: linear-gradient(0deg, rgba(222,227,0,1) 0%, rgba(175,230,18,1) 48%, rgba(190,240,0,1) 100%);
+}
+
+.yellow {
+    background: #e9ba00;
+    background: linear-gradient(0deg, rgba(255,166,0,1) 0%, rgba(246,199,26,1) 48%, rgba(238,191,0,1) 100%);
+
+}
+
+.orange {
+    background: #e77b00;
+    background: linear-gradient(0deg, rgba(244,69,0,1) 0%, rgba(255,86,24,1) 48%, rgba(238,119,0,1) 100%);
+}
+
+.red {
+    background: #ff382d;
+    background: linear-gradient(0deg, rgba(187,0,0,1) 0%, rgba(226,20,59,1) 48%, rgba(238,0,97,1) 100%);
+}
+
+
+
+@keyframes fadeinimage {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes placename {
+    from {
+        margin-top: 300px;
+    }
+
+    to {
+        margin-top: 0;
+    }
+}
+
+@keyframes mainStreetPlace {
+    from {
+        margin-top: 240px;
+    }
+
+    to {
+        margin-top: 0;
+    }
+}
+
+@keyframes scalepoint {
+    from {
+        transform: scale(1)
+    }
+
+    50% {
+        transform: scale(1.5)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+
+
+
+#place {
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: hidden;
+}
+
+#place-image {
+    display: flex;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+    animation: fadeinimage 5s 1 ease-out forwards;
+    /* border-radius: 10px; */
+}
+
+#place-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+}
+
+@keyframes forwardarrow {
+    from {
+        margin-top: 10px;
+    }
+
+    to {
+        margin-top: 0;
+    }
+}
+
+@keyframes leftarrow {
+    from {
+        right: 0;
+    }
+
+    to {
+        right: 10px;
+    }
+}
+
+@keyframes rightarrow {
+    from {
+        right: 10px;
+    }
+
+    to {
+        right: 20px;
+    }
+}
+
+.forward {
+    animation: forwardarrow 1s infinite ease-in;
+}
+
+.left {
+    animation: leftarrow 1s infinite ease-in;
+}
+
+.rigth {
+    animation: rightarrow 1s infinite ease-in;
+}
+
+#place-info {
+    display: flex;
+    width: 100%;
+    height: 65px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+    font-weight: 500;
+    margin-top: 300px;
+    /* border-bottom: 1px solid #fff;
+    border-top: 1px solid #fff; */
+    /* background: #05c46b; */
+    /* border-radius: 10px; */
+    animation: placename 0.75s 1 ease forwards;
+    animation-delay: 1.25s;
+}
+
+#place-name {
+    width: 70%;
+    font-size: 1.5rem;
+    padding-left: 20px;
+}
+
+#place-distance-block {
+    width: 30%;
+    font-size: 1.3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-right: 10px;
+}
+
+#place-distance {
+    /* position: absolute; */
+    /* right: 10px;
+    top: 30px; */
+    width: 100%;
+    font-size: 1.0rem;
+}
+
+#place-arrow {
+    padding-right: 10px;
+    display: flex;
+    /* margin-top: -20px; */
+}
+
+#place-arrow img {
+    width: 32px;
+}
+
+#traffic-main-street-place {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+    /* background: #05c46b; */
+    font-weight: 500;
+    margin-top: 240px;
+    /* border-bottom: 1px solid #fff; */
+    /* border-radius: 10px; */
+    animation: mainStreetPlace 0.75s 1 ease forwards;
+    animation-delay: 1.25s;
+}
+
+#arrow-left {
+    transform: rotate(-90deg);
+    width: 20px;
+    height: auto;
+    padding: 0 10px;
+    position: absolute;
+    right: 10px
+}
+
+#arrow-right {
+    transform: rotate(90deg);
+    width: 20px;
+    height: auto;
+    padding: 0 10px;
+    position: absolute;
+    right: 10px
+}
+
+#arrow-forward {
+    width: 20px;
+    height: auto;
+    padding: 0 10px;
+    position: absolute;
+    right: 10px
+}
+
+#arrow-place-left {
+    transform: rotate(-90deg);
+    width: 20px;
+    height: auto;
+    padding: 0 10px;
+}
+
+#arrow-place-right {
+    transform: rotate(90deg);
+    width: 20px;
+    height: auto;
+    padding: 0 10px;
+}
+
+#arrow-place-forward {
+    width: 20px;
+    height: auto;
+    padding: 0 10px;
+}
+
+#arrow-point {
+    width: 20px;
+    height: auto;
+    padding: 0 10px;
+    position: absolute;
+    right: 10px;
+    animation: scalepoint 2s infinite ease;
+}
+
+.fullwidth {
+    width: 640px;
+    border-radius: 15px;
+    animation: videofullwidth 0.5s 1 ease forwards;
+}
+
+.squarewidth {
+    width: 896px;
+    border-radius: 15px;
+    animation: videosquarewidth 0.5s 1 ease forwards;
+}
+
+@keyframes videofullwidth {
+    from {
+        width: 640px
+    }
+
+    to {
+        width: 896px
+    }
+}
+
+@keyframes videosquarewidth {
+    from {
+        width: 896px
+    }
+
+    to {
+        width: 640px
+    }
+}
+
+
+/* Weather */
+
+#main-weather {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* background: rgb(129, 15, 99); */
+    /* background: rgb(129, 15, 99);
+    background: linear-gradient(0deg, rgba(129, 15, 99, 1) 0%, rgba(250, 80, 57, 1) 100%); */
+    height: 440px;
+    max-height: 440px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 20px;
+    opacity: 0;
+    animation: bgFadeIn 1.5s 1 ease-out forwards;
+    /* animation-delay: 1s; */
+    border-radius: 15px;
+}
+
+
+.hot-40 {
+    background: rgb(129, 15, 99);
+    background: linear-gradient(0deg, rgba(129, 15, 99, 1) 0%, rgba(250, 80, 57, 1) 100%);
+}
+
+.hot-30 {
+    background: rgb(193, 33, 31);
+    background: linear-gradient(0deg, rgba(193, 33, 31, 1) 0%, rgba(247, 144, 27, 1) 100%);
+}
+
+.hot-20 {
+    background: rgb(233, 126, 0);
+    background: linear-gradient(0deg, rgba(233, 126, 0, 1) 0%, rgba(235, 199, 14, 1) 100%);
+}
+
+.hot-10 {
+    background: rgb(106, 176, 76);
+    background: linear-gradient(0deg, rgb(91, 173, 56) 0%, rgb(160, 194, 59) 100%);
+}
+
+.mid-0 {
+    background: rgb(34, 166, 179);
+    background: linear-gradient(0deg, rgb(20, 145, 156) 0%, rgb(73, 170, 180) 100%);
+}
+
+.cold-5 {
+    background: rgb(190, 46, 221);
+    background: linear-gradient(0deg, rgba(190, 46, 221, 1) 0%, rgba(224, 86, 253, 1) 100%);
+}
+
+.cold-10 {
+    background: rgb(72, 52, 212);
+    background: linear-gradient(0deg, rgba(72, 52, 212, 1) 0%, rgba(104, 109, 224, 1) 100%);
+}
+
+.cold-15 {
+    background: rgb(19, 15, 64);
+    background: linear-gradient(0deg, rgba(19, 15, 64, 1) 0%, rgba(48, 51, 107, 1) 100%);
+}
+
+.cold-20 {
+    background: rgb(19, 15, 64);
+    background: linear-gradient(0deg, rgba(19, 15, 64, 1) 0%, rgba(48, 51, 107, 1) 100%);
+}
+
+#time {
+    font-size: 36px;
+    font-weight: 100;
+    transform: scale(0);
+    animation: scaleclock 0.5s 1 ease-out forwards;
+    animation-delay: 1s;
+}
+
+#date {
+    font-size: 14px;
+    font-weight: 100;
+    transform: scale(0);
+    animation: scaleclock 0.5s 1 ease-out forwards;
+    animation-delay: 1.2s;
+}
+
+#w-icon {
+    margin-top: 1em;
+    align-self: flex-start;
+    margin-left: -1.3em;
+    opacity: 0;
+    animation: wFadeIn 0.5s 1 ease-out forwards;
+    animation-delay: 1.4s;
+}
+
+#w-description {
+    width: 100%;
+    font-size: 16px;
+    font-weight: 100;
+    text-transform: uppercase;
+    margin-top: -1.2em;
+    margin-left: -20px;
+    opacity: 0;
+    animation: wFadeIn 0.5s 1 ease-out forwards;
+    animation-delay: 1.5s;
+}
+
+#w-temp-block {
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    line-height: 80px;
+    margin-left: -20px;
+    opacity: 0;
+    animation: wFadeIn 0.5s 1 ease-out forwards;
+    animation-delay: 1.6s;
+}
+
+#w-temp {
+    font-size: 70px;
+    font-weight: 100;
+    /* width: 60%; */
+    justify-content: left;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: -20px;
+    opacity: 0;
+    animation: wFadeIn 0.5s 1 ease-out forwards;
+    animation-delay: 1.7s;
+}
+
+.w-plus {
+    font-size: 30px;
+    font-weight: 100;
+    line-height: 50px;
+    margin-left: -20px;
+    opacity: 0;
+    animation: wFadeIn 0.5s 1 ease-out forwards;
+    animation-delay: 1.8s;
+}
+
+/* .w-celcie {
+    font-size: 72px;
+    font-weight: 100;
+    line-height: 50px;
+} */
+
+#w-temp-small {
+    font-size: 22px;
+    font-weight: 100;
+    /* width: 30%; */
+    justify-content: right;
+    line-height: 24px;
+    margin-left: -20px;
+    opacity: 0;
+    animation: wFadeIn 0.5s 1 ease-out forwards;
+    animation-delay: 1.9s;
+}
+
+#w-temp-sm {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    width: 20%;
+    margin-left: -20px;
+    opacity: 0;
+    animation: wFadeIn 0.5s 1 ease-out forwards;
+    animation-delay: 2s;
+}
+
+#w-feel {
+    width: 100%;
+    font-size: 16px;
+    font-weight: 100;
+    margin-left: -20px;
+    opacity: 0;
+    animation: wFadeIn 0.5s 1 ease-out forwards;
+    animation-delay: 2.1s;
+}
+
+#w-wind {
+    width: 100%;
+    font-size: 24px;
+    font-weight: 100;
+    text-transform: uppercase;
+    margin-top: 1em;
+    margin-left: -20px;
+    opacity: 0;
+    animation: wFadeIn 0.5s 1 ease-out forwards;
+    animation-delay: 2.2s;
+}
+
+#w-wind-direction {
+    width: 100%;
+    font-size: 16px;
+    font-weight: 100;
+    margin-left: -20px;
+    opacity: 0;
+    animation: wFadeIn 0.5s 1 ease-out forwards;
+    animation-delay: 2.3s;
+}
+
+#w-wind-speed {
+    width: 100%;
+    font-size: 20px;
+    font-weight: 300;
+    margin-left: -20px;
+    opacity: 0;
+    animation: wFadeIn 0.5s 1 ease-out forwards;
+    animation-delay: 2.4s;
+}
+
+
+@keyframes bgFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes wFadeIn {
+    from {
+        opacity: 0;
+        margin-left: -20px;
+    }
+
+    to {
+        opacity: 1;
+        margin-left: 0px;
+    }
+}
+
+@keyframes scaleclock {
+    from {
+        transform: scale(0)
+    }
+
+    50% {
+        transform: scale(1.5)
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+#shymcam {
+    width: 100%;
+    height: 188px;
+    /* border-radius: 15px; */
+    /* margin-top: 12px; */
+    border-radius: 15px 15px 0px 0px;
+    overflow: hidden;
+    opacity: 0;
+    animation: bgFadeIn 1s 1 ease-out forwards;
+    animation-delay: 1s;
+    transform: scale(1.3);
+}
+
+#shymcam-2 {
+    width: 100%;
+    /* height: 205px; */
+    /* border-radius: 15px; */
+    /* margin-top: 12px; */
+    border-radius: 0px 0px 15px 15px;
+    overflow: hidden;
+    opacity: 0;
+    animation: bgFadeIn 1s 1 ease-out forwards;
+    animation-delay: 2s;
+}
+
+/* #shymcam video {
+    border-radius: 15px;
+} */
+
+#main-shym {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: rgb(9, 113, 184);
+    height: 270px;
+    max-height: 270px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    animation: bgFadeIn 1s 1 ease-out forwards;
+    animation-delay: 1.5s;
+    /* border-radius: 15px; */
+    /* margin-bottom: 5px; */
+}
+
+#shym-logo {
+    width: 70%;
+    padding: 5%;
+    opacity: 0;
+    animation: bgFadeIn 0.5s 1 ease-out forwards;
+    animation-delay: 0.5s;
+}
+
+#shym-icon {
+    align-self: flex-start;
+    /* opacity: 0; */
+    /* animation: wFadeIn 0.5s 1 ease-out forwards;
+    animation-delay: 1s; */
+    line-height: 1em;
+    filter: brightness(5);
+}
+
+#shym-temp {
+    align-self: flex-start;
+    font-size: 0.9em;
+    /* opacity: 0; */
+    /* animation: wFadeIn 0.5s 1 ease-out forwards;
+    animation-delay: 0.5s; */
+}
+
+#shym-welcome {
+    width: 100%;
+    font-size: 1.5em;
+    text-align: center;
+    line-height: 1;
+    margin: 10px 0;
+    opacity: 0;
+    animation: wFadeIn 0.5s 1 ease-out forwards;
+    animation-delay: 1s;
+    text-transform: uppercase;
+}
+
+#shym-temp-block {
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    /* line-height: 80px; */
+    margin-left: -20px;
+    opacity: 0;
+    animation: wFadeIn 0.5s 1 ease-out forwards;
+    animation-delay: 1.5s;
+}
+
+.shym-wel-fade-in-out {
+
+}
+
+
+
+
+/* ///////////////////// */
+
+#controlbar {
+    position: absolute;
+    bottom: 0;
+    height: 30px;
+    display: flex;
+    width: 100%;
+}
+
+.but {
+    font-size: 12px;
+    background-color: #006ce7;
+    border: none;
+    border-radius: 5px;
+    color:#fff;
+    padding: 10px 15px;
+    margin: 0 10px;
+    text-align: center;
+    line-height: 15px;
+    display: inline-block;
+    cursor: pointer;
+    display: inline-flex;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.but:hover {
+    background-color: #008be7;
+}
+
+
+
+
+
+
+/* ////////////////////////////////////////////////////////////////// */
+
+#wrap {
+    width: 100vw;
+    /* height: 100vh; */
+    animation: fadeinn 2s 1 ease-out forwards;
+    animation-delay: 3s;
+    /* background: radial-gradient(farthest-corner at 30vw 20vh, #7397a1 1%, #3f2c41 100%); */
+    opacity: 0;
+    z-index: 1;
+}
+
+.snow {
+  border-radius: 50%;
+  opacity: 0.8;
+  position: absolute;
+  top: -100vh;
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.layer1 {
+  width: 1.5rem;
+  height: 1.5rem;
+  filter: blur(1.5px);
+  box-shadow: 67.6vw 65.6vh 0 -0.22rem#fff,20.4vw 14vh 0 -0.37rem#fff,72.9vw 60.9vh 0 -0.2rem#fff,92.1vw 60.4vh 0 -0.47rem#fff,3.7vw 83vh 0 -0.02rem#fff,79.8vw 42.8vh 0 -0.45rem#fff,36vw 97.7vh 0 -0.19rem#fff,82.6vw 48.7vh 0 -0.08rem#fff,6vw 24.4vh 0 -0.49rem#fff,28vw 34.3vh 0 -0.23rem#fff,29.8vw 68.4vh 0 -0.32rem#fff,62.4vw 16.3vh 0 -0.27rem#fff,82.7vw 13.9vh 0 -0.26rem#fff,40.4vw 43.3vh 0 -0.09rem#fff,44.2vw 37.8vh 0 -0.02rem#fff,53.3vw 24.9vh 0 -0.1rem#fff,23.5vw 52.4vh 0 -0.39rem#fff,15.2vw 33.8vh 0 -0.47rem#fff,24.2vw 77.2vh 0 -0.06rem#fff,74.2vw 30.5vh 0 -0.15rem#fff,8.8vw 44.7vh 0 -0.28rem#fff,22.5vw 11.6vh 0 -0.48rem#fff,51.8vw 44.7vh 0 -0.12rem#fff,9.3vw 67.3vh 0 -0.17rem#fff,16vw 24.3vh 0 -0.05rem#fff,55.1vw 91.8vh 0 -0.28rem#fff,32.3vw 33.7vh 0 -0.2rem#fff,8.1vw 62.2vh 0 -0.19rem#fff,23.5vw 95.9vh 0 -0.44rem#fff,91.9vw 26.2vh 0 -0.29rem#fff,75.6vw 54.7vh 0 -0.34rem#fff,98.6vw 60.3vh 0 -0.47rem#fff,10vw 76.9vh 0 -0.29rem#fff,78.6vw 48.4vh 0 -0.04rem#fff,70.5vw 36.9vh 0 -0.24rem#fff,75vw 31.9vh 0 -0.1rem#fff,16.5vw 80.1vh 0 -0.08rem#fff,35.6vw 67.4vh 0 -0.44rem#fff,36.6vw 62.3vh 0 -0.2rem#fff,43.7vw 91.3vh 0 -0.26rem#fff,13.8vw 94.2vh 0 -0.01rem#fff,87.3vw 39vh 0 -0.33rem#fff,39.4vw 38.9vh 0 -0.38rem#fff,55.9vw 36.5vh 0 -0.01rem#fff,80vw 21.7vh 0 -0.16rem#fff,4.8vw 99.2vh 0 -0.46rem#fff,91.2vw 11.5vh 0 -0.2rem#fff,4.1vw 30.3vh 0 -0.18rem#fff,67vw 76.8vh 0 -0.24rem#fff,59.6vw 66.2vh 0 -0.24rem#fff,86.8vw 36.1vh 0 -0.29rem#fff,43.9vw 11.5vh 0 -0.33rem#fff,64.3vw 87.6vh 0 -0.18rem#fff,81.6vw 61.3vh 0 -0.16rem#fff,60.5vw 54.4vh 0 -0.12rem#fff,95.3vw 60.7vh 0 -0.21rem#fff,58.6vw 1.3vh 0 -0.46rem#fff,42.9vw 58vh 0 -0.02rem#fff,11.1vw 73.5vh 0 -0.44rem#fff,52.9vw 54.9vh 0 -0.16rem#fff,26.7vw 24vh 0 -0.08rem#fff,78.9vw 21.6vh 0 -0.29rem#fff,54.8vw 55.1vh 0 -0.33rem#fff,80.6vw 71.4vh 0 -0.44rem#fff,49vw 64.6vh 0 -0.22rem#fff,39.3vw 95.6vh 0 -0.1rem#fff,32.4vw 99vh 0 -0.48rem#fff,21.7vw 55.4vh 0 -0.26rem#fff,61.6vw 42vh 0 -0.11rem#fff,52.7vw 84vh 0 -0.45rem#fff,54.3vw 94.1vh 0 -0.24rem#fff,12.8vw 54vh 0 -0.34rem#fff,25.9vw 60.5vh 0 -0.43rem#fff,32.1vw 73vh 0 -0.47rem#fff,53.1vw 78.2vh 0 -0.3rem#fff,13.7vw 69.3vh 0 -0.36rem#fff,35.2vw 47.2vh 0 -0.12rem#fff,98.3vw 42.7vh 0 -0.24rem#fff,60.3vw 56.8vh 0 -0.05rem#fff,91.9vw 39vh 0 -0.42rem#fff,68.7vw 62.2vh 0 -0.19rem#fff,24.5vw 90.9vh 0 -0.29rem#fff,66.4vw 42vh 0 -0.03rem#fff,0.6vw 50.4vh 0 -0.35rem#fff,29.8vw 56.6vh 0 -0.48rem#fff,13.2vw 43.1vh 0 -0.41rem#fff,28.5vw 72vh 0 -0.41rem#fff,98vw 61vh 0 -0.42rem#fff,50.9vw 32.7vh 0 -0.25rem#fff,59.3vw 58.4vh 0 -0.26rem#fff,78.9vw 43.2vh 0 -0.03rem#fff,97.5vw 35.8vh 0 -0.32rem#fff,48.4vw 35.7vh 0 -0.06rem#fff,82.2vw 62.2vh 0 -0.32rem#fff,83.9vw 89.6vh 0 -0.19rem#fff,56vw 49.7vh 0 -0.36rem#fff,38.1vw 81.9vh 0 -0.2rem#fff,41.9vw 77.5vh 0 -0.39rem#fff,16.9vw 22.2vh 0 -0.39rem#fff,82.4vw 39vh 0 -0.34rem#fff,97vw 83vh 0 -0.42rem#fff,68.4vw 32.7vh 0 -0.41rem#fff,48.6vw 12.5vh 0 -0.1rem#fff,68.5vw 58.7vh 0 -0.13rem#fff,98.9vw 45.3vh 0 -0.02rem#fff,59.3vw 41.6vh 0 -0.46rem#fff,11.2vw 74.7vh 0 -0.24rem#fff,69.1vw 66.8vh 0 -0.18rem#fff,47.9vw 18.1vh 0 -0.33rem#fff,47.5vw 66.5vh 0 -0.47rem#fff,47.6vw 85.9vh 0 -0.12rem#fff,33.2vw 2.5vh 0 -0.13rem#fff,40.7vw 10.7vh 0 -0.13rem#fff,49vw 60.3vh 0 -0.32rem#fff,3.8vw 18.4vh 0 -0.47rem#fff,6vw 63.2vh 0 -0.26rem#fff,90.9vw 33.1vh 0 -0.48rem#fff,46.6vw 97.2vh 0 -0.24rem#fff,7.2vw 88vh 0 -0.24rem#fff,85.3vw 31vh 0 -0.01rem#fff,53.7vw 69vh 0 -0.1rem#fff,16.8vw 19vh 0 -0.24rem#fff,36.5vw 22.2vh 0 -0.29rem#fff,96.2vw 85.8vh 0 -0.1rem#fff,29.7vw 16.9vh 0 -0.01rem#fff,62.2vw 42.6vh 0 -0.06rem#fff,50.1vw 65.5vh 0 -0.29rem#fff,97.2vw 14.2vh 0 -0.02rem#fff,54.1vw 20.5vh 0 -0.07rem#fff,90vw 51.4vh 0 -0.34rem#fff,25.8vw 70.6vh 0 -0.45rem#fff,84.3vw 17.1vh 0 -0.15rem#fff,6vw 47.1vh 0 -0.23rem#fff,78vw 88.8vh 0 -0.03rem#fff,71.9vw 12.4vh 0 -0.11rem#fff,28.3vw 41.9vh 0 -0.44rem#fff,90.6vw 70.4vh 0 -0.3rem#fff,3vw 37.6vh 0 -0.33rem#fff,3.5vw 31vh 0 -0.27rem#fff,52.6vw 53.1vh 0 -0.07rem#fff,64.2vw 44.2vh 0 -0.05rem#fff,18.2vw 37.8vh 0 -0.18rem#fff,56.8vw 40.7vh 0 -0.3rem#fff,97.3vw 77.7vh 0 -0.44rem#fff,6.8vw 46.2vh 0 -0.12rem#fff,16.9vw 4.7vh 0 -0.27rem#fff,40.7vw 64.7vh 0 -0.38rem#fff,47.2vw 34.7vh 0 -0.25rem#fff,72vw 15.9vh 0 -0.39rem#fff,50.2vw 13vh 0 -0.44rem#fff,86.1vw 18.7vh 0 -0.07rem#fff,2.6vw 58.5vh 0 -0.34rem#fff,35.3vw 37.5vh 0 -0.2rem#fff,85.5vw 6.5vh 0 -0.24rem#fff,80.2vw 36.1vh 0 -0.47rem#fff,10.7vw 6.5vh 0 -0.04rem#fff,45.1vw 38.8vh 0 -0.2rem#fff,75.5vw 64.8vh 0 -0.3rem#fff,24vw 85vh 0 -0.28rem#fff,59.1vw 58.9vh 0 -0.4rem#fff,27.1vw 69.2vh 0 -0.36rem#fff,15.2vw 74.4vh 0 -0.28rem#fff,44.2vw 61vh 0 -0.35rem#fff,14.4vw 4.1vh 0 -0.01rem#fff,86.9vw 93.3vh 0 -0.06rem#fff,1.9vw 58.2vh 0 -0.48rem#fff,2vw 68.8vh 0 -0.35rem#fff,5.4vw 38.4vh 0 -0.17rem#fff,92.1vw 94.4vh 0 -0.1rem#fff,38.5vw 94.9vh 0 -0.44rem#fff,45.5vw 25.3vh 0 -0.27rem#fff,99.4vw 24.9vh 0 -0.3rem#fff,68.7vw 17.9vh 0 -0.04rem#fff,0.7vw 34.4vh 0 -0.05rem#fff,21.8vw 89.1vh 0 -0.24rem#fff,85.7vw 13.7vh 0 -0.05rem#fff,11.7vw 74.7vh 0 -0.29rem#fff,27.8vw 35vh 0 -0.27rem#fff,78.5vw 73vh 0 -0.43rem#fff,1.8vw 55vh 0 -0.47rem#fff,23.9vw 0.5vh 0 -0.36rem#fff,23.8vw 11.9vh 0 -0.04rem#fff,14.7vw 87.5vh 0 -0.35rem#fff,99.9vw 50.5vh 0 -0.34rem#fff,89.7vw 25.5vh 0 -0.08rem#fff,9.1vw 27.8vh 0 -0.49rem#fff,93vw 61.5vh 0 -0.15rem#fff,87.3vw 41.3vh 0 -0.1rem#fff,21.3vw 5.1vh 0 -0.03rem#fff,76.2vw 7.3vh 0 -0.46rem#fff,26.5vw 92.2vh 0 -0.45rem#fff,98.1vw 37.9vh 0 -0.28rem#fff,76vw 7.2vh 0 -0.05rem#fff,65vw 8.4vh 0 -0.03rem#fff,95.9vw 67.9vh 0 -0.21rem#fff,48vw 39vh 0 -0.17rem#fff,19.8vw 18.2vh 0 -0.46rem#fff,86.6vw 73.2vh 0 -0.33rem#fff,9.2vw 60.2vh 0 -0.14rem#fff,2.5vw 66.9vh 0 -0.28rem#fff,45.7vw 54.1vh 0 -0.15rem#fff,93.9vw 64.2vh 0 -0.31rem#fff,25.2vw 39.8vh 0 -0.13rem#fff,71.3vw 7.5vh 0 -0.18rem#fff,62.8vw 64.6vh 0 -0.29rem#fff,43.4vw 41vh 0 -0.46rem#fff,41.4vw 50.1vh 0 -0.36rem#fff,73vw 73.5vh 0 -0.26rem#fff,92.8vw 80.7vh 0 -0.16rem#fff,69.7vw 34vh 0 -0.11rem#fff,59.3vw 53.8vh 0 -0.09rem#fff,3.6vw 58.9vh 0 -0.5rem#fff,17.9vw 21.4vh 0 -0.2rem#fff,31.3vw 30.1vh 0 -0.33rem#fff,99.9vw 78.3vh 0 -0.11rem#fff,62.6vw 1.5vh 0 -0.48rem#fff,5.8vw 12.8vh 0 -0.3rem#fff,34.8vw 48vh 0 -0.09rem#fff,56.1vw 60vh 0 -0.4rem#fff,20.7vw 52.4vh 0 -0.33rem#fff,38.8vw 60.7vh 0 -0.12rem#fff,47.8vw 37.2vh 0 -0.38rem#fff,96.8vw 38.8vh 0 -0.02rem#fff,33.9vw 42.9vh 0 -0.49rem#fff,30.4vw 42.9vh 0 -0.17rem#fff,57.7vw 73.3vh 0 -0.15rem#fff,86.9vw 55.3vh 0 -0.27rem#fff,13vw 76.7vh 0 -0.18rem#fff,33.5vw 23.5vh 0 -0.14rem#fff,88.8vw 95.3vh 0 -0.11rem#fff,86.4vw 91.3vh 0 -0.38rem#fff,29.3vw 1.1vh 0 -0.23rem#fff,42.7vw 70vh 0 -0.41rem#fff,67.8vw 4.7vh 0 -0.33rem#fff,31.8vw 77.4vh 0 -0.18rem#fff,58.9vw 41.2vh 0 -0.18rem#fff,18.3vw 11.6vh 0 -0.37rem#fff,60vw 3.3vh 0 -0.25rem#fff,62.8vw 67.6vh 0 -0.02rem#fff,25.3vw 12.8vh 0 -0.05rem#fff,10.3vw 89.9vh 0 -0.37rem#fff,72.4vw 71.6vh 0 -0.16rem#fff,60.6vw 70.7vh 0 -0.38rem#fff,63.3vw 95.7vh 0 -0.41rem#fff,41.8vw 33.9vh 0 -0.28rem#fff,0.6vw 19.5vh 0 -0.29rem#fff,34.7vw 88vh 0 -0.2rem#fff,18.4vw 51.6vh 0 -0.38rem#fff,51.9vw 67.3vh 0 -0.39rem#fff,99.9vw 9.8vh 0 -0.22rem#fff,72.7vw 19vh 0 -0.29rem#fff,60.1vw 92.2vh 0 -0.22rem#fff,28.9vw 46.4vh 0 -0.16rem#fff,50.1vw 97.4vh 0 -0.06rem#fff,5.3vw 55.3vh 0 -0.34rem#fff,67.1vw 23.2vh 0 -0.16rem#fff,50.5vw 55.8vh 0 -0.04rem#fff,56.4vw 34.3vh 0 -0.16rem#fff,64.3vw 89.8vh 0 -0.28rem#fff,39.3vw 83.3vh 0 -0.4rem#fff,15.4vw 5.9vh 0 -0.32rem#fff,31.5vw 72.3vh 0 -0.26rem#fff,90.1vw 37.3vh 0 -0.44rem#fff,12.1vw 34.2vh 0 -0.05rem#fff,22.4vw 23.8vh 0 -0.3rem#fff,62.2vw 61.7vh 0 -0.45rem#fff,6.6vw 1.7vh 0 -0.13rem#fff,31.7vw 64.6vh 0 -0.45rem#fff,42.5vw 79.2vh 0 -0.04rem#fff,35.9vw 6.9vh 0 -0.48rem#fff,19.6vw 4.3vh 0 -0.43rem#fff,37.1vw 6.6vh 0 -0.31rem#fff,96.8vw 19.4vh 0 -0.26rem#fff,34.3vw 27.1vh 0 -0.25rem#fff,91.9vw 93.9vh 0 -0.37rem#fff,24.2vw 49.4vh 0 -0.31rem#fff,10.5vw 21.5vh 0 -0.41rem#fff,98.3vw 8vh 0 -0.38rem#fff,60.5vw 77.2vh 0 -0.17rem#fff,9.7vw 29vh 0 -0.33rem#fff,83.3vw 85.1vh 0 -0.48rem#fff,27.4vw 20.3vh 0 -0.22rem#fff,14.6vw 100vh 0 -0.3rem#fff,33.7vw 24.9vh 0 -0.39rem#fff,74vw 69.9vh 0 -0.27rem#fff,97.3vw 36.8vh 0 -0.37rem#fff,32.9vw 35.8vh 0 -0.33rem#fff,82.2vw 65vh 0 -0.19rem#fff,54.1vw 57.9vh 0 -0.25rem#fff,68.4vw 72.3vh 0 -0.26rem#fff,22vw 59.2vh 0 -0.48rem#fff,58vw 93.5vh 0 -0.29rem#fff,8.4vw 98.1vh 0 -0.06rem#fff,5.7vw 70.4vh 0 -0.3rem#fff,51.4vw 15.7vh 0 -0.04rem#fff,71.2vw 85.2vh 0 -0.12rem#fff,54.6vw 77.9vh 0 -0.23rem#fff,31.4vw 90.5vh 0 -0.09rem#fff,75.7vw 36.1vh 0 -0.35rem#fff,88.3vw 16.3vh 0 -0.23rem#fff;
+  animation-duration: 6s;
+  z-index: 1;
+}
+
+.layer1.a {
+  animation-delay: -3s;
+}
+
+.layer2 {
+  width: 1.2rem;
+  height: 1.2rem;
+  filter: blur(3px);
+  box-shadow: 28.4vw 61.8vh 0 -0.23rem#fff,8.5vw 59.7vh 0 -0.28rem#fff,22.6vw 45.1vh 0 -0.07rem#fff,15.4vw 41.4vh 0 -0.33rem#fff,11.2vw 61.5vh 0 -0.36rem#fff,30.9vw 93vh 0 -0.3rem#fff,31vw 27vh 0 -0.06rem#fff,30.1vw 91.7vh 0 -0.27rem#fff,93.3vw 55.9vh 0 -0.15rem#fff,98.5vw 45.6vh 0 -0.3rem#fff,6.4vw 52.4vh 0 -0.42rem#fff,91.9vw 40.5vh 0 -0.41rem#fff,16.2vw 21.9vh 0 -0.15rem#fff,53.2vw 48.7vh 0 -0.47rem#fff,82.6vw 15.7vh 0 -0.32rem#fff,46.5vw 78.9vh 0 -0.09rem#fff,2.1vw 17.1vh 0 -0.28rem#fff,72.9vw 37.5vh 0 -0.47rem#fff,56.8vw 24vh 0 -0.12rem#fff,71.7vw 14.4vh 0 -0.13rem#fff,28.5vw 10.5vh 0 -0.11rem#fff,40.2vw 18.1vh 0 -0.3rem#fff,62.1vw 58.3vh 0 -0.01rem#fff,50.5vw 98.8vh 0 -0.46rem#fff,69.8vw 86.8vh 0 -0.46rem#fff,4.2vw 25.9vh 0 -0.29rem#fff,38vw 51.2vh 0 -0.31rem#fff,50.2vw 41.5vh 0 -0.03rem#fff,42.8vw 20vh 0 -0.18rem#fff,49vw 36.2vh 0 -0.04rem#fff,72.3vw 68.4vh 0 -0.28rem#fff,66.8vw 23.3vh 0 -0.47rem#fff,65.5vw 62.7vh 0 -0.12rem#fff,7.6vw 93.5vh 0 -0.27rem#fff,87.4vw 43.6vh 0 -0.35rem#fff,97vw 20vh 0 -0.17rem#fff,86.1vw 47vh 0 -0.5rem#fff,65vw 55vh 0 -0.36rem#fff,26.1vw 78.4vh 0 -0.26rem#fff,2.6vw 75.1vh 0 -0.13rem#fff,8.8vw 98.8vh 0 -0.35rem#fff,37.9vw 47.5vh 0 -0.33rem#fff,2.8vw 39.7vh 0 -0.13rem#fff,70.2vw 94vh 0 -0.21rem#fff,4.8vw 69.5vh 0 -0.26rem#fff,38.8vw 47.8vh 0 -0.1rem#fff,83.6vw 79.7vh 0 -0.43rem#fff,10.9vw 4.3vh 0 -0.06rem#fff,72vw 24.3vh 0 -0.37rem#fff,54.5vw 77.6vh 0 -0.39rem#fff,99vw 75.8vh 0 -0.49rem#fff,61.1vw 64.8vh 0 -0.39rem#fff,95.8vw 39.4vh 0 -0.41rem#fff,41.8vw 91.1vh 0 -0.22rem#fff,85.2vw 13.7vh 0 -0.25rem#fff,6.8vw 62.8vh 0 -0.29rem#fff,65.3vw 54.6vh 0 -0.38rem#fff,66.9vw 29.3vh 0 -0.22rem#fff,8.3vw 53.2vh 0 -0.41rem#fff,0.7vw 61.5vh 0 -0.08rem#fff,99.1vw 12.6vh 0 -0.14rem#fff,38.7vw 31.5vh 0 -0.46rem#fff,65.9vw 77.8vh 0 -0.05rem#fff,19.3vw 37.2vh 0 -0.15rem#fff,43vw 55.7vh 0 -0.4rem#fff,60.9vw 99.1vh 0 -0.48rem#fff,35.8vw 99.6vh 0 -0.26rem#fff,17vw 49.8vh 0 -0.37rem#fff,59.3vw 30.9vh 0 -0.28rem#fff,29.3vw 83.4vh 0 -0.04rem#fff,25vw 66.8vh 0 -0.26rem#fff,69.1vw 88vh 0 -0.06rem#fff,94.1vw 35.3vh 0 -0.37rem#fff,21vw 48.2vh 0 -0.07rem#fff,88.9vw 90.5vh 0 -0.01rem#fff,8.3vw 99.6vh 0 -0.02rem#fff,82.3vw 7.8vh 0 -0.33rem#fff,26.2vw 63vh 0 -0.21rem#fff,68.2vw 80.9vh 0 -0.36rem#fff,99.8vw 75.3vh 0 -0.07rem#fff,54.5vw 52.2vh 0 -0.09rem#fff,54.8vw 66.5vh 0 -0.18rem#fff,67.7vw 70.3vh 0 -0.42rem#fff,67.8vw 71.7vh 0 -0.42rem#fff,69vw 17.5vh 0 -0.21rem#fff,91.3vw 49.2vh 0 -0.17rem#fff,53.7vw 6.7vh 0 -0.24rem#fff,16.4vw 99.2vh 0 -0.06rem#fff,19vw 48vh 0 -0.49rem#fff,9vw 50.6vh 0 -0.48rem#fff,68.2vw 26.9vh 0 -0.14rem#fff,45.2vw 41.1vh 0 -0.15rem#fff,46.2vw 0.6vh 0 -0.24rem#fff,72.3vw 47.1vh 0 -0.13rem#fff,23.6vw 87.8vh 0 -0.11rem#fff,49.3vw 57.8vh 0 -0.01rem#fff,1.7vw 67.8vh 0 -0.07rem#fff,96.6vw 30.6vh 0 -0.06rem#fff,68.8vw 13.7vh 0 -0.28rem#fff,85.2vw 59.7vh 0 -0.19rem#fff,10.8vw 93.3vh 0 -0.31rem#fff,37.1vw 27.1vh 0 -0.37rem#fff,60.2vw 12vh 0 -0.39rem#fff,6.2vw 9.4vh 0 -0.11rem#fff,40.2vw 25.6vh 0 -0.29rem#fff,49.1vw 11.6vh 0 -0.17rem#fff,59vw 5.4vh 0 -0.5rem#fff,59.1vw 64vh 0 -0.42rem#fff,19.6vw 24.3vh 0 -0.13rem#fff,10.2vw 86.3vh 0 -0.49rem#fff,84.4vw 12.9vh 0 -0.4rem#fff,30.2vw 18.4vh 0 -0.42rem#fff,99.8vw 99.9vh 0 -0.25rem#fff,71vw 75.4vh 0 -0.01rem#fff,98.7vw 96.8vh 0 -0.29rem#fff,10.9vw 37.2vh 0 -0.26rem#fff,82.8vw 68.8vh 0 -0.43rem#fff,84.7vw 35.7vh 0 -0.02rem#fff,14.8vw 6.8vh 0 -0.44rem#fff,70.6vw 12.7vh 0 -0.34rem#fff,41.5vw 15.8vh 0 -0.27rem#fff,88.5vw 84.4vh 0 -0.42rem#fff,98.2vw 81vh 0 -0.47rem#fff,28.2vw 0.5vh 0 -0.1rem#fff,43.7vw 11.2vh 0 -0.19rem#fff,60.4vw 59.1vh 0 -0.48rem#fff,28.9vw 75.1vh 0 -0.07rem#fff,88vw 94.1vh 0 -0.24rem#fff,31.9vw 21.2vh 0 -0.3rem#fff,22.8vw 1.6vh 0 -0.49rem#fff,14.9vw 91.9vh 0 -0.25rem#fff,15.2vw 17.6vh 0 -0.09rem#fff,82.6vw 79.3vh 0 -0.13rem#fff,73.6vw 28.1vh 0 -0.45rem#fff,64.9vw 24.1vh 0 -0.15rem#fff,8.4vw 89.5vh 0 -0.17rem#fff,51.3vw 42.3vh 0 -0.01rem#fff,3.4vw 59.1vh 0 -0.07rem#fff,48vw 21.7vh 0 -0.31rem#fff,19.8vw 28.2vh 0 -0.19rem#fff,34.3vw 3.2vh 0 -0.32rem#fff,47.7vw 56.6vh 0 -0.14rem#fff,41.7vw 29.7vh 0 -0.27rem#fff,9.6vw 71vh 0 -0.42rem#fff,3.7vw 40.4vh 0 -0.23rem#fff,83.5vw 6.5vh 0 -0.25rem#fff,99.3vw 60.1vh 0 -0.04rem#fff,58vw 26.4vh 0 -0.24rem#fff,90.9vw 7.2vh 0 -0.21rem#fff,49.9vw 42.3vh 0 -0.1rem#fff,40.3vw 44.4vh 0 -0.28rem#fff,65.9vw 12vh 0 -0.13rem#fff,42.1vw 58vh 0 -0.17rem#fff,48.3vw 3.9vh 0 -0.18rem#fff,12.9vw 62.1vh 0 -0.24rem#fff,91.9vw 5.8vh 0 -0.29rem#fff,45vw 39.9vh 0 -0.32rem#fff,7vw 97.6vh 0 -0.22rem#fff,67.6vw 91.8vh 0 -0.27rem#fff,27.2vw 52.9vh 0 -0.22rem#fff,20.6vw 34.6vh 0 -0.32rem#fff,52.3vw 2.5vh 0 -0.32rem#fff,61.4vw 17.5vh 0 -0.01rem#fff,55.2vw 10.1vh 0 -0.07rem#fff,45.3vw 47.7vh 0 -0.37rem#fff,31vw 16.6vh 0 -0.39rem#fff,72.1vw 82.5vh 0 -0.06rem#fff,2.9vw 44.5vh 0 -0.36rem#fff,44.1vw 38.1vh 0 -0.14rem#fff,18.1vw 34.4vh 0 -0.38rem#fff,1.9vw 45.2vh 0 -0.25rem#fff,43.1vw 47.6vh 0 -0.13rem#fff,27.2vw 3vh 0 -0.14rem#fff,4.6vw 32vh 0 -0.37rem#fff,43.5vw 69.8vh 0 -0.1rem#fff,47.9vw 38.3vh 0 -0.2rem#fff,56.7vw 52.4vh 0 -0.36rem#fff,66.3vw 10.2vh 0 -0.08rem#fff,61.2vw 80.3vh 0 -0.32rem#fff,65.6vw 0.1vh 0 -0.24rem#fff,20.9vw 19.9vh 0 -0.08rem#fff,72.3vw 23.1vh 0 -0.06rem#fff,9.5vw 7vh 0 -0.01rem#fff,16.7vw 31.8vh 0 -0.5rem#fff,69.8vw 91vh 0 -0.5rem#fff,3.3vw 92.7vh 0 -0.06rem#fff,68.6vw 72.5vh 0 -0.39rem#fff,12.4vw 84.5vh 0 -0.43rem#fff,17.1vw 8.1vh 0 -0.06rem#fff,21.7vw 40.4vh 0 -0.23rem#fff,75.9vw 40.9vh 0 -0.39rem#fff,16.6vw 78vh 0 -0.22rem#fff,60.1vw 4.5vh 0 -0.28rem#fff,95.2vw 8.3vh 0 -0.04rem#fff,9.1vw 47.7vh 0 -0.33rem#fff,62.8vw 41.5vh 0 -0.08rem#fff,54.7vw 50.3vh 0 -0.38rem#fff,59vw 94.2vh 0 -0.41rem#fff,42.9vw 5.5vh 0 -0.5rem#fff,90.6vw 82.7vh 0 -0.37rem#fff,31.6vw 33.2vh 0 -0.41rem#fff,34.5vw 18.5vh 0 -0.44rem#fff,64vw 4.5vh 0 -0.28rem#fff,67.7vw 3.8vh 0 -0.34rem#fff,15.9vw 33.9vh 0 -0.12rem#fff,60.5vw 61.4vh 0 -0.07rem#fff,52.7vw 40.2vh 0 -0.09rem#fff,96.1vw 63vh 0 -0.24rem#fff,50.4vw 56.4vh 0 -0.05rem#fff,87.1vw 39.6vh 0 -0.39rem#fff,54.9vw 86.4vh 0 -0.13rem#fff,91.6vw 52.4vh 0 -0.43rem#fff,79.4vw 48.5vh 0 -0.37rem#fff,80.6vw 44.8vh 0 -0.05rem#fff,63vw 15.8vh 0 -0.25rem#fff,7.5vw 58.7vh 0 -0.47rem#fff,94.5vw 84vh 0 -0.09rem#fff,76.6vw 37.7vh 0 -0.31rem#fff,10vw 74.4vh 0 -0.27rem#fff,68.1vw 88.1vh 0 -0.41rem#fff,89.4vw 25vh 0 -0.29rem#fff,77.6vw 58.3vh 0 -0.19rem#fff,0.6vw 95.7vh 0 -0.16rem#fff,90.2vw 50.8vh 0 -0.47rem#fff,65.2vw 77vh 0 -0.26rem#fff,22.1vw 59.8vh 0 -0.14rem#fff,33.4vw 32.8vh 0 -0.12rem#fff,80.9vw 93.7vh 0 -0.35rem#fff,50.5vw 24.3vh 0 -0.07rem#fff,93vw 40.8vh 0 -0.06rem#fff,64vw 76.1vh 0 -0.26rem#fff,22vw 30.9vh 0 -0.01rem#fff,38vw 79.8vh 0 -0.39rem#fff,20vw 36.5vh 0 -0.26rem#fff,57.3vw 99.9vh 0 -0.01rem#fff,95.8vw 5.7vh 0 -0.32rem#fff,48.6vw 59.5vh 0 -0.35rem#fff,81.5vw 15.6vh 0 -0.42rem#fff,37.8vw 22.6vh 0 -0.31rem#fff,49.1vw 7.5vh 0 -0.44rem#fff,71.5vw 85.3vh 0 -0.01rem#fff,3.8vw 66.2vh 0 -0.06rem#fff,7.6vw 43vh 0 -0.1rem#fff,19.7vw 80vh 0 -0.21rem#fff,11.7vw 38.8vh 0 -0.26rem#fff,48.9vw 60.7vh 0 -0.01rem#fff,44.8vw 99.7vh 0 -0.31rem#fff,53.7vw 69.7vh 0 -0.04rem#fff,55.2vw 79.8vh 0 -0.02rem#fff,96.4vw 75.2vh 0 -0.09rem#fff,70.2vw 61.8vh 0 -0.46rem#fff,28.7vw 13.2vh 0 -0.42rem#fff,91.8vw 54.2vh 0 -0.15rem#fff,68.8vw 62.8vh 0 -0.26rem#fff,81.5vw 60.1vh 0 -0.07rem#fff,52.7vw 30vh 0 -0.42rem#fff,25.4vw 1vh 0 -0.07rem#fff,89.4vw 15.1vh 0 -0.15rem#fff,18.3vw 94.3vh 0 -0.08rem#fff,40.1vw 79.3vh 0 -0.28rem#fff,29.2vw 34.2vh 0 -0.46rem#fff,63.1vw 27.3vh 0 -0.42rem#fff,48.3vw 37.7vh 0 -0.13rem#fff,59vw 48.3vh 0 -0.03rem#fff,54.4vw 23vh 0 -0.42rem#fff,73.8vw 4.2vh 0 -0.12rem#fff,34.7vw 27.4vh 0 -0.18rem#fff,32.2vw 64.2vh 0 -0.18rem#fff,75.7vw 76.2vh 0 -0.12rem#fff,92.9vw 45.9vh 0 -0.48rem#fff,7.1vw 90.5vh 0 -0.26rem#fff,60.5vw 35.1vh 0 -0.48rem#fff,21vw 19.9vh 0 -0.16rem#fff,34vw 11.6vh 0 -0.42rem#fff,8.5vw 74.4vh 0 -0.02rem#fff,43.8vw 39.8vh 0 -0.09rem#fff,33.9vw 62.5vh 0 -0.09rem#fff,11.3vw 36.8vh 0 -0.24rem#fff,2.5vw 1.9vh 0 -0.4rem#fff,1.9vw 35.5vh 0 -0.13rem#fff,62.7vw 9.7vh 0 -0.23rem#fff,91.4vw 57.9vh 0 -0.3rem#fff,70.1vw 46.4vh 0 -0.01rem#fff,72.8vw 92.5vh 0 -0.08rem#fff,90vw 47.8vh 0 -0.45rem#fff,97.5vw 23.3vh 0 -0.25rem#fff,81.7vw 35.4vh 0 -0.32rem#fff,53.8vw 59.6vh 0 -0.43rem#fff,48.1vw 14.6vh 0 -0.14rem#fff,11.4vw 67.8vh 0 -0.15rem#fff,94.5vw 78.9vh 0 -0.47rem#fff,66vw 78.9vh 0 -0.31rem#fff,93.8vw 45.2vh 0 -0.33rem#fff,99.1vw 50.8vh 0 -0.47rem#fff,59.9vw 63.8vh 0 -0.22rem#fff,99.9vw 9.9vh 0 -0.04rem#fff,30.1vw 20.2vh 0 -0.03rem#fff,29.1vw 22.8vh 0 -0.01rem#fff,28.1vw 61.9vh 0 -0.47rem#fff,59.5vw 13.1vh 0 -0.18rem#fff;
+  animation-duration: 8s;
+  z-index: 1;
+}
+
+.layer2.a {
+  animation-delay: -4s;
+}
+
+.layer3 {
+  width: 0.8rem;
+  height: 0.8rem;
+  filter: blur(6px);
+  box-shadow: 84.4vw 66.4vh 0 -0.22rem#fff,88.8vw 6.6vh 0 -0.29rem#fff,88.5vw 71.8vh 0 -0.37rem#fff,34.6vw 51.6vh 0 -0.29rem#fff,5vw 5.7vh 0 -0.23rem#fff,43.3vw 10.1vh 0 -0.05rem#fff,63.9vw 61.7vh 0 -0.12rem#fff,19.4vw 47.3vh 0 -0.41rem#fff,31.8vw 90.1vh 0 -0.04rem#fff,31.6vw 8.7vh 0 -0.28rem#fff,17.5vw 96.1vh 0 -0.25rem#fff,28.2vw 76.7vh 0 -0.16rem#fff,94.8vw 28.1vh 0 -0.15rem#fff,67.4vw 44.7vh 0 -0.49rem#fff,86.6vw 20.7vh 0 -0.23rem#fff,63.6vw 85.7vh 0 -0.41rem#fff,30.7vw 41.2vh 0 -0.15rem#fff,78.5vw 33.8vh 0 -0.31rem#fff,63.6vw 89.2vh 0 -0.1rem#fff,64.4vw 71.8vh 0 -0.04rem#fff,66.4vw 83.2vh 0 -0.5rem#fff,25.3vw 19.9vh 0 -0.28rem#fff,69.8vw 96.6vh 0 -0.33rem#fff,89.3vw 55.5vh 0 -0.22rem#fff,42.9vw 53.8vh 0 -0.2rem#fff,30.1vw 47.8vh 0 -0.23rem#fff,5.4vw 36.4vh 0 -0.31rem#fff,50.8vw 31.8vh 0 -0.34rem#fff,35.6vw 59vh 0 -0.08rem#fff,11.3vw 14vh 0 -0.49rem#fff,42.2vw 0.6vh 0 -0.23rem#fff,70.4vw 53.8vh 0 -0.38rem#fff,23.5vw 59.1vh 0 -0.27rem#fff,6.4vw 53vh 0 -0.28rem#fff,67.7vw 56.5vh 0 -0.17rem#fff,74.4vw 5.9vh 0 -0.3rem#fff,43vw 3.5vh 0 -0.18rem#fff,7.7vw 93.1vh 0 -0.31rem#fff,47.7vw 20.8vh 0 -0.23rem#fff,17.9vw 86.4vh 0 -0.11rem#fff,45.9vw 41.7vh 0 -0.15rem#fff,29.8vw 72.6vh 0 -0.47rem#fff,21.6vw 46.7vh 0 -0.29rem#fff,90.4vw 38.9vh 0 -0.14rem#fff,49.3vw 41.8vh 0 -0.12rem#fff,11.5vw 8vh 0 -0.1rem#fff,39.2vw 94vh 0 -0.06rem#fff,85.5vw 8.3vh 0 -0.13rem#fff,13.4vw 24.8vh 0 -0.47rem#fff,70.2vw 21.2vh 0 -0.3rem#fff,11.5vw 21.1vh 0 -0.26rem#fff,2.8vw 52.2vh 0 -0.35rem#fff,97.7vw 26.9vh 0 -0.11rem#fff,13.4vw 88.8vh 0 -0.14rem#fff,67.1vw 55.7vh 0 -0.29rem#fff,8vw 42.5vh 0 -0.19rem#fff,28.5vw 81.7vh 0 -0.05rem#fff,30.2vw 36.6vh 0 -0.27rem#fff,71.9vw 60.1vh 0 -0.32rem#fff,5.6vw 62.1vh 0 -0.46rem#fff,94.3vw 91.6vh 0 -0.23rem#fff,20.2vw 54.2vh 0 -0.27rem#fff,17.8vw 60.5vh 0 -0.36rem#fff,63.3vw 48.1vh 0 -0.26rem#fff,5.3vw 53.5vh 0 -0.3rem#fff,37.2vw 13.7vh 0 -0.08rem#fff,45vw 10vh 0 -0.38rem#fff,50.4vw 18vh 0 -0.27rem#fff,87.2vw 92.9vh 0 -0.17rem#fff,8.4vw 62.7vh 0 -0.43rem#fff,69.4vw 57.5vh 0 -0.5rem#fff,84.9vw 47.6vh 0 -0.05rem#fff,51.2vw 31.4vh 0 -0.1rem#fff,16.9vw 60.1vh 0 -0.29rem#fff,97.2vw 95.7vh 0 -0.31rem#fff,80.7vw 13.1vh 0 -0.43rem#fff,57vw 64.4vh 0 -0.5rem#fff,21.5vw 8vh 0 -0.25rem#fff,41.5vw 91.3vh 0 -0.22rem#fff,61vw 98.5vh 0 -0.5rem#fff,60vw 87.9vh 0 -0.4rem#fff,100vw 66.9vh 0 -0.44rem#fff,58.6vw 92vh 0 -0.31rem#fff,94.1vw 21.8vh 0 -0.37rem#fff,71.7vw 3.1vh 0 -0.03rem#fff,6.8vw 81.2vh 0 -0.12rem#fff,42.3vw 32.9vh 0 -0.27rem#fff,87.1vw 99.9vh 0 -0.4rem#fff,34.5vw 0.6vh 0 -0.22rem#fff,68.6vw 60.4vh 0 -0.04rem#fff,43.6vw 58.7vh 0 -0.21rem#fff,44.3vw 48.9vh 0 -0.3rem#fff,1.2vw 50.8vh 0 -0.36rem#fff,84.5vw 67.1vh 0 -0.21rem#fff,86.2vw 87.9vh 0 -0.03rem#fff,19.4vw 92.1vh 0 -0.39rem#fff,78.9vw 36.6vh 0 -0.38rem#fff,18vw 5.1vh 0 -0.41rem#fff,51.3vw 31.9vh 0 -0.48rem#fff,63vw 60vh 0 -0.11rem#fff,69.9vw 31.1vh 0 -0.05rem#fff,97.9vw 44.3vh 0 -0.01rem#fff,2.5vw 16.4vh 0 -0.04rem#fff,56.9vw 34.9vh 0 -0.36rem#fff,87.7vw 29.7vh 0 -0.42rem#fff,43.2vw 92.2vh 0 -0.42rem#fff,15.9vw 17.9vh 0 -0.14rem#fff,49.5vw 36.9vh 0 -0.43rem#fff,46.5vw 32.9vh 0 -0.49rem#fff,0.8vw 99.8vh 0 -0.23rem#fff,87.2vw 80.6vh 0 -0.12rem#fff,36.7vw 63.9vh 0 -0.05rem#fff,71.4vw 31.8vh 0 -0.22rem#fff,88.5vw 26vh 0 -0.1rem#fff,41.4vw 57vh 0 -0.23rem#fff,48.5vw 61.5vh 0 -0.44rem#fff,89.5vw 56.8vh 0 -0.19rem#fff,14.9vw 45.8vh 0 -0.03rem#fff,34vw 26vh 0 -0.34rem#fff,70.2vw 41.4vh 0 -0.14rem#fff,5.5vw 37.1vh 0 -0.21rem#fff,67.1vw 83.6vh 0 -0.37rem#fff,31.1vw 47.2vh 0 -0.24rem#fff,94.5vw 80.4vh 0 -0.29rem#fff,53.7vw 7.6vh 0 -0.39rem#fff,31.4vw 1.6vh 0 -0.11rem#fff,78.9vw 2.3vh 0 -0.25rem#fff,76.6vw 34.9vh 0 -0.26rem#fff,9.8vw 10.3vh 0 -0.2rem#fff,51.6vw 10.9vh 0 -0.3rem#fff,92.2vw 1.1vh 0 -0.06rem#fff,83.1vw 21.8vh 0 -0.16rem#fff,38.8vw 33.2vh 0 -0.14rem#fff,80.1vw 10.3vh 0 -0.46rem#fff,33.8vw 87.4vh 0 -0.41rem#fff,81.5vw 75.4vh 0 -0.16rem#fff,39.8vw 70.2vh 0 -0.38rem#fff,69.1vw 22.1vh 0 -0.38rem#fff,78.2vw 35.2vh 0 -0.12rem#fff,45.6vw 44.3vh 0 -0.28rem#fff,96.7vw 28.4vh 0 -0.47rem#fff,34.7vw 70.6vh 0 -0.1rem#fff,17.1vw 23.7vh 0 -0.42rem#fff,83.1vw 9.8vh 0 -0.14rem#fff,84.5vw 93.8vh 0 -0.25rem#fff,90vw 93vh 0 -0.22rem#fff,50.6vw 63vh 0 -0.34rem#fff,49.4vw 6.5vh 0 -0.11rem#fff,92.9vw 49.7vh 0 -0.02rem#fff,63.1vw 57.3vh 0 -0.11rem#fff,91.7vw 7.5vh 0 -0.09rem#fff,63vw 40.1vh 0 -0.5rem#fff,69.4vw 21.4vh 0 -0.11rem#fff,51.6vw 90.5vh 0 -0.18rem#fff,24.4vw 48.5vh 0 -0.22rem#fff,39vw 33.6vh 0 -0.27rem#fff,88.3vw 40vh 0 -0.08rem#fff,68.3vw 61.2vh 0 -0.41rem#fff,55vw 87.9vh 0 -0.2rem#fff,63vw 12.1vh 0 -0.5rem#fff,48.1vw 55.4vh 0 -0.05rem#fff,45.3vw 7.9vh 0 -0.26rem#fff,35.7vw 71.2vh 0 -0.04rem#fff,86.4vw 99.5vh 0 -0.26rem#fff,40vw 55.1vh 0 -0.44rem#fff,53.5vw 76.6vh 0 -0.03rem#fff,5.6vw 31.6vh 0 -0.08rem#fff,5.4vw 54vh 0 -0.35rem#fff,65.9vw 47.5vh 0 -0.22rem#fff,73.9vw 23.8vh 0 -0.21rem#fff,57.5vw 15vh 0 -0.06rem#fff,1.3vw 49.7vh 0 -0.22rem#fff,14.9vw 19vh 0 -0.34rem#fff,36.9vw 73.2vh 0 -0.03rem#fff,64.8vw 92.1vh 0 -0.34rem#fff,4.9vw 31.3vh 0 -0.18rem#fff,43.4vw 18.4vh 0 -0.4rem#fff,46.3vw 74.8vh 0 -0.2rem#fff,54.4vw 80vh 0 -0.29rem#fff,9.7vw 96.5vh 0 -0.42rem#fff,44.2vw 28.3vh 0 -0.46rem#fff,4.9vw 3.6vh 0 -0.17rem#fff,38.3vw 96.5vh 0 -0.16rem#fff,43.2vw 76.8vh 0 -0.03rem#fff,62.3vw 15.9vh 0 -0.26rem#fff,46.4vw 1.7vh 0 -0.02rem#fff,38.5vw 62.2vh 0 -0.07rem#fff,25.9vw 7.4vh 0 -0.37rem#fff,46.6vw 48.4vh 0 -0.27rem#fff,25vw 47.3vh 0 -0.14rem#fff,21vw 83.8vh 0 -0.09rem#fff,89.6vw 48.6vh 0 -0.13rem#fff,47.5vw 93.8vh 0 -0.44rem#fff,49.3vw 85.2vh 0 -0.04rem#fff,86.6vw 16.1vh 0 -0.39rem#fff,38vw 34vh 0 -0.34rem#fff,99.3vw 34.7vh 0 -0.28rem#fff,16.4vw 19.5vh 0 -0.31rem#fff,87.3vw 97.6vh 0 -0.41rem#fff,58.3vw 28vh 0 -0.43rem#fff,77.6vw 72.9vh 0 -0.02rem#fff,9.3vw 57.1vh 0 -0.14rem#fff,85.9vw 52.6vh 0 -0.34rem#fff,74.2vw 88.8vh 0 -0.43rem#fff,16.8vw 28.7vh 0 -0.27rem#fff,5.8vw 89.4vh 0 -0.09rem#fff,25.5vw 49.8vh 0 -0.3rem#fff,34.9vw 52.4vh 0 -0.08rem#fff,62.1vw 48.5vh 0 -0.37rem#fff,83.8vw 79.8vh 0 -0.34rem#fff,77.7vw 73.7vh 0 -0.43rem#fff,35.4vw 45.1vh 0 -0.1rem#fff,100vw 38.6vh 0 -0.45rem#fff,15.6vw 23.2vh 0 -0.04rem#fff,22.4vw 50.4vh 0 -0.18rem#fff,99.6vw 71.6vh 0 -0.42rem#fff,39.9vw 76vh 0 -0.09rem#fff,96.2vw 53.4vh 0 -0.43rem#fff,4.5vw 33.9vh 0 -0.06rem#fff,77.5vw 93.6vh 0 -0.14rem#fff,12.6vw 19.1vh 0 -0.49rem#fff,22.8vw 29.5vh 0 -0.44rem#fff,84.5vw 21.4vh 0 -0.24rem#fff,41vw 61.1vh 0 -0.04rem#fff,66.4vw 20.4vh 0 -0.26rem#fff,76.8vw 84.7vh 0 -0.11rem#fff,23.8vw 25.9vh 0 -0.31rem#fff,30.5vw 32vh 0 -0.18rem#fff,19.7vw 68.1vh 0 -0.36rem#fff,14vw 57.1vh 0 -0.27rem#fff,34.8vw 19.7vh 0 -0.28rem#fff,63.6vw 90.1vh 0 -0.5rem#fff,3.3vw 89.2vh 0 -0.37rem#fff,25.5vw 10.8vh 0 -0.48rem#fff,21.2vw 87.9vh 0 -0.41rem#fff,7.1vw 70.5vh 0 -0.22rem#fff,68.9vw 61.5vh 0 -0.45rem#fff,21.7vw 71.4vh 0 -0.03rem#fff,49vw 72.1vh 0 -0.32rem#fff,53vw 51.4vh 0 -0.48rem#fff,83.8vw 85.5vh 0 -0.18rem#fff,3.3vw 42.1vh 0 -0.36rem#fff,0.2vw 39.8vh 0 -0.19rem#fff,99.9vw 27vh 0 -0.19rem#fff,2vw 92vh 0 -0.14rem#fff,3.3vw 98.3vh 0 -0.36rem#fff,49.1vw 72.7vh 0 -0.12rem#fff,56.7vw 78.1vh 0 -0.07rem#fff,7.1vw 8.6vh 0 -0.22rem#fff,25.7vw 87.6vh 0 -0.03rem#fff,29.2vw 20.4vh 0 -0.2rem#fff,64vw 15.2vh 0 -0.28rem#fff,23vw 97.6vh 0 -0.34rem#fff,45.3vw 49.8vh 0 -0.23rem#fff,67.3vw 59.2vh 0 -0.28rem#fff,33.3vw 25.2vh 0 -0.27rem#fff,14.5vw 95.2vh 0 -0.36rem#fff,50.8vw 78.6vh 0 -0.18rem#fff,34.7vw 99.5vh 0 -0.33rem#fff,37.9vw 39.9vh 0 -0.09rem#fff,62.8vw 61.4vh 0 -0.26rem#fff,70.8vw 53.5vh 0 -0.04rem#fff,26.2vw 38.7vh 0 -0.36rem#fff,70vw 83.6vh 0 -0.09rem#fff,75.4vw 16.6vh 0 -0.04rem#fff,99.8vw 64.2vh 0 -0.23rem#fff,97.9vw 57.8vh 0 -0.49rem#fff,28.4vw 92.3vh 0 -0.42rem#fff,60.4vw 52.9vh 0 -0.46rem#fff,15.6vw 36.5vh 0 -0.24rem#fff,12.2vw 36.2vh 0 -0.23rem#fff,91.8vw 68.4vh 0 -0.31rem#fff,18.4vw 74.8vh 0 -0.28rem#fff,74.8vw 53.9vh 0 -0.25rem#fff,93vw 84vh 0 -0.2rem#fff,71.3vw 57.2vh 0 -0.5rem#fff,9.4vw 22.4vh 0 -0.01rem#fff,53.5vw 77.7vh 0 -0.09rem#fff,72vw 44.3vh 0 -0.38rem#fff,43.5vw 48.7vh 0 -0.22rem#fff,45.1vw 3.6vh 0 -0.46rem#fff,88.1vw 23.9vh 0 -0.29rem#fff,80.4vw 11.2vh 0 -0.15rem#fff,1.8vw 26.7vh 0 -0.44rem#fff,72.2vw 93.7vh 0 -0.37rem#fff,84.2vw 89.6vh 0 -0.39rem#fff,68.8vw 7.1vh 0 -0.01rem#fff,49.5vw 72.5vh 0 -0.25rem#fff,34.5vw 35.1vh 0 -0.14rem#fff,66.4vw 39.4vh 0 -0.08rem#fff,74.3vw 57.5vh 0 -0.09rem#fff,69.8vw 14.1vh 0 -0.24rem#fff,32.2vw 58.5vh 0 -0.46rem#fff,96.8vw 90.5vh 0 -0.06rem#fff,13.7vw 12.9vh 0 -0.28rem#fff,64.3vw 21.8vh 0 -0.43rem#fff,54.9vw 25vh 0 -0.41rem#fff,55.8vw 24.1vh 0 -0.34rem#fff,26.7vw 29.1vh 0 -0.01rem#fff,65vw 66.7vh 0 -0.27rem#fff;
+  animation-duration: 10s;
+  z-index: 1;
+}
+
+.layer3.a {
+  animation-delay: -5s;
+}
+
+@keyframes fall {
+  100% {
+    transform: translateY(200vh);
+  }
+}
+
+@keyframes fadeinn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 0.6;
+    }
+}

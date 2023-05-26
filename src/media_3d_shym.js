@@ -1,22 +1,5 @@
-// This file is required by the index.html file and will
-// be executed in the renderer process for that window.
-// No Node.js APIs are available in this process because
-// `nodeIntegration` is turned off. Use `preload.js` to
-// selectively enable features needed in the rendering
-// process.
-
-
-// var Electron = require("electron");
-const remote = require('@electron/remote');
-const {getCurrentWindow, globalShortcut} = remote;
-
-var reload = ()=>{
-  getCurrentWindow().reload()
-}
-
-setTimeout(() =>{
-  reload()
-}, 1000)
+const { ipcRenderer } = require("electron");
+// setTimeout(() => {ipcRenderer.send('reload-me')}, 5000)
 
 const http = require("http");
 const moment = require("moment");
@@ -24,10 +7,10 @@ const fs = require("fs-extra");
 const fsold = require("fs");
 const axios = require("axios");
 
-const FULLWIDTH = 896;
-const FULLHEIGHT = 640;
-let VIDEOWIDTH = 640;
-let VIDEOHEIGHT = 640;
+const FULLWIDTH = 3088;
+const FULLHEIGHT = 720;
+let VIDEOWIDTH = 3088;
+let VIDEOHEIGHT = 720;
 
 const placePlayer = document.querySelector("#player");
 
@@ -53,6 +36,8 @@ let rs = false;
 let isPhotoReportActive = false;
 let stop = false;
 
+let photoMode = false;
+
 indexMedia = 0;
 
 let mediaPlayer = document.createElement("video");
@@ -71,16 +56,14 @@ const getNameOfLed = async () => {
   });
 };
 
-getNameOfLed();
-
-// fs.readJson(mediaJson, (err, obj) => {
-//   console.log(obj)
-// })
+setTimeout(() => {
+  getNameOfLed();
+}, 1000);
 
 const fetchData = async (url) => {
   let response = await axios.get(url);
   DATA = response.data;
-  console.log("DATA:", DATA);
+  // console.log("DATA:", DATA);
   await fs.writeFile(mediaJson, JSON.stringify(DATA), (err) => {
     if (err) {
       console.log(err);
@@ -105,6 +88,12 @@ const readJsonFile = (file) => {
       console.log("Данные JSON переданны в переменные");
 
       if (allMedias) {
+        allMedias.map((v, i) => {
+          // console.log(v, i);
+          if (allMedias[i].videos.length == 0) {
+            allMedias.splice(i, 1);
+          }
+        });
         // console.log("MEDIAS ", allMedias);
         containFiles(allMedias);
       } else {
@@ -138,7 +127,9 @@ const containFiles = (allMedias) => {
           numMedia: 0,
           videos: [
             {
-              file: host + video.file,
+              title: video.title,
+              size_video: video.size_video,
+              file: video.file,
               format: video.format,
               localfile: mediafolder + "/" + title + "." + ext,
             },
@@ -154,9 +145,12 @@ const containFiles = (allMedias) => {
     if (rs) {
       rs = false;
       containFileNumber = 0;
+      medias = allMedias;
+      setTimeout(() => {
+        downloadVideo(filesForDownload[containFileNumber]);
+        // downLoadInfoImage();
+      }, 1000);
       // console.log(filesForDownload);
-      downloadVideo(filesForDownload[containFileNumber]);
-      downLoadInfoImage();
     } else {
       medias = allMedias;
       setTimeout(() => {
@@ -173,10 +167,6 @@ const containFiles = (allMedias) => {
 };
 
 const downLoadInfoImage = async () => {
-  // fs.ensureDir(dirInfo, (err) => {
-  //   console.log(err);
-  // });
-
   let length = info.length;
   for (let i = 0; i < length; i++) {
     let len = info[i].file.split(".").length;
@@ -185,17 +175,20 @@ const downLoadInfoImage = async () => {
     // console.log(fileUrl);
     let localfile = dirInfo + "/" + i + "." + ext;
     // console.log(localfile);
-    let file = await fsold.createWriteStream(localfile);
-
-    const request = await http.get(fileUrl, (res) => {
-      console.log("Изображение должно скачаться");
-      res.pipe(file);
-      console.log("Изображение скачивается");
-      res.on("end", function () {
-        console.log(`Изображение ${info[i].file} скачалось.`);
-        info[i].localfile = localfile;
+    if (fsold.existsSync(localfile) && fsold.statSync(localfile).size > 0) {
+      console.log("Изображение уже загружено");
+    } else {
+      let file = await fsold.createWriteStream(localfile);
+      const request = await http.get(fileUrl, (res) => {
+        console.log("Изображение должно скачаться");
+        res.pipe(file);
+        console.log("Изображение скачивается");
+        res.on("end", function () {
+          console.log(`Изображение ${info[i].file} скачалось.`);
+          info[i].localfile = localfile;
+        });
       });
-    });
+    }
   }
 };
 
@@ -246,9 +239,10 @@ const downloadVideo = (video) => {
           } else {
             isDownloading = false;
             console.log("Все файлы загружены");
-            indexMedia = 0;
-            medias = allMedias;
-            playVideo();
+            // indexMedia = 0;
+            // medias = allMedias;
+            // playVideo();
+            ipcRenderer.send("reload-me");
           }
         } else {
           let file = fsold.createWriteStream(path);
@@ -285,9 +279,10 @@ const downloadVideo = (video) => {
               } else {
                 isDownloading = false;
                 console.log("Все файлы загружены");
-                indexMedia = 0;
-                medias = allMedias;
-                playVideo();
+                ipcRenderer.send("reload-me");
+                // indexMedia = 0;
+                // medias = allMedias;
+                // playVideo();
               }
             } else {
               setTimeout(() => {
@@ -337,8 +332,9 @@ const downloadSingleVideo = (video, y, truePlay) => {
             isDownloading = false;
             console.log("Файл загружен");
             if (truePlay) {
-              medias = allMedias;
-              playVideo();
+              ipcRenderer.send("reload-me");
+              // medias = allMedias;
+              // playVideo();
             }
             // playVideo(allMedias);
           } else {
@@ -380,15 +376,15 @@ const mediaPlayerStyle = () => {
   mediaPlayer.left = 0;
 };
 
-const nextPlay = () => {
-  const numMedia = (medias) => {
-    if (medias[indexMedia].numMedia < medias[indexMedia].videos.length - 1) {
-      medias[indexMedia].numMedia += 1;
-    } else {
-      medias[indexMedia].numMedia = 0;
-    }
-  };
+const numMedia = (medias) => {
+  if (medias[indexMedia].numMedia < medias[indexMedia].videos.length - 1) {
+    medias[indexMedia].numMedia += 1;
+  } else {
+    medias[indexMedia].numMedia = 0;
+  }
+};
 
+const nextPlay = () => {
   if (indexMedia < medias.length - 1) {
     numMedia(medias);
     indexMedia++;
@@ -399,18 +395,21 @@ const nextPlay = () => {
   num = medias[indexMedia].numMedia;
   video = medias[indexMedia].videos[num];
   checkVideoWidth(video);
-  console.log(video.size_video);
+  // console.log(video.size_video);
   if (
     fsold.existsSync(video.localfile) &&
-    fsold.statSync(video.localfile).size > 0
-    && fsold.statSync(video.localfile).size == Number(video.size_video)
+    fsold.statSync(video.localfile).size > 0 &&
+    fsold.statSync(video.localfile).size == Number(video.size_video)
   ) {
     // mediaPlayer.pause();
     mediaPlayer.src = video.localfile;
     // mediaPlayer.load();
     mediaPlayer.play();
   } else {
-    downloadSingleVideo(video, num);
+    if (navigator.onLine) {
+      console.log(video);
+      downloadSingleVideo(video, num);
+    }
     nextPlay();
   }
   return;
@@ -425,20 +424,22 @@ const playVideo = () => {
   checkVideoWidth(video);
   mediaPlayerStyle();
 
-  if (fsold.existsSync(video.localfile)) {
-    let sizeFile = fsold.statSync(video.localfile).size;
-    if (sizeFile > 0) {
-      mediaPlayer.src = video.localfile;
-      placePlayer.append(mediaPlayer);
-      mediaPlayer.play();
-    }
+  if (
+    fsold.existsSync(video.localfile) &&
+    fsold.statSync(video.localfile).size > 0 &&
+    fsold.statSync(video.localfile).size == Number(video.size_video)
+  ) {
+    mediaPlayer.src = video.localfile;
+    placePlayer.append(mediaPlayer);
+    mediaPlayer.play();
   } else {
+    if (navigator.onLine) {
+      console.log(video);
+      downloadSingleVideo(video, num, true);
+    }
+    // indexMedia += 1;
     // nextPlay();
-    downloadSingleVideo(video, num, true);
   }
-  // const statsFile = fsold.statSync(video.localfile);
-  // console.log(statsFile);
-  // nextPlay(medias)
 
   mediaPlayer.addEventListener("ended", () => {
     nextPlay();
@@ -446,8 +447,13 @@ const playVideo = () => {
   return;
 };
 
+const swithOffRestart = () => {
+  fetch(`${host}/api/v1/led/restart/${NAME_LED_DISPLAY}/`, {
+    method: "GET",
+  });
+};
+
 const checkUpdateContent = async () => {
-  // console.log(host);
   let response = await axios({
     method: "get",
     baseURL: "http://new.displaycontrol.ru",
@@ -457,31 +463,41 @@ const checkUpdateContent = async () => {
 
   // console.log(response);
   if (response.status == 200) {
-    // rs = response.data.restart_player
-    if (rs && JSON.stringify(CHECKDATA) !== DATAFROMJSONFILE) {
-      // rs = true;
+    rs = response.data.restart_player;
+    if (rs) {
+      swithOffRestart();
       fetchData(URL);
     }
-  }  
+  }
+};
+
+const autoCheckUpdateContent = async () => {
+  let response = await axios({
+    method: "get",
+    baseURL: "http://new.displaycontrol.ru",
+    url: `/api/v1/led/${NAME_LED_DISPLAY}/`,
+  });
+  CHECKDATA = response.data;
+
+  if (response.status == 200) {
+    if (JSON.stringify(CHECKDATA) !== DATAFROMJSONFILE) {
+      rs = true;
+      fetchData(URL);
+    }
+  }
 };
 
 setInterval(() => {
-  checkUpdateContent();
+  if (navigator.onLine) {
+    checkUpdateContent();
+  }
 }, 10000);
 
-const swithOffRestart = () => {
-  fetch(`${host}/api/v1/led/restart/${NAME_LED_DISPLAY}/`, {
-    method: "GET",
-  });
-  try {
-    if (rs) {
-      track.load();
-      track.pause();
-    }
-  } catch {
-    console.log("Не получилось остановить");
+setInterval(() => {
+  if (navigator.onLine) {
+    autoCheckUpdateContent();
   }
-};
+}, 60000);
 
 let n = 0;
 const checkFileNum = setInterval(async () => {
@@ -489,9 +505,13 @@ const checkFileNum = setInterval(async () => {
     await console.log("Воспроизведение зависло");
     rs = await true;
     medias = allMedias;
-    await playVideo();
+    // await playVideo();
     n = indexMedia;
-    // fetchData(URL);
+    if (navigator.onLine) {
+      fetchData(URL);
+    } else {
+      ipcRenderer.send("reload-me");
+    }
   } else {
     n = indexMedia;
   }
@@ -499,85 +519,85 @@ const checkFileNum = setInterval(async () => {
 
 // Автоматическая сверка контента
 
-const autoFetchData = async (url) => {
-  let response = await axios.get(url);
-  DATA = response.data;
-  // console.log(DATA);
-  await fs.writeFile(mediaJson, JSON.stringify(DATA), (err) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log("Файл JSON успешно создан");
-      autoReadJsonFile(mediaJson);
-    }
-  });
-};
+// const autoFetchData = async (url) => {
+//   let response = await axios.get(url);
+//   DATA = response.data;
+//   // console.log(DATA);
+//   await fs.writeFile(mediaJson, JSON.stringify(DATA), (err) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log("Файл JSON успешно создан");
+//       autoReadJsonFile(mediaJson);
+//     }
+//   });
+// };
 
-const autoReadJsonFile = (file) => {
-  fs.readJson(file, (err, obj) => {
-    if (err) {
-      console.error(err);
-      plaingNow = false;
-    } else {
-      allMedias = obj.blocks;
-      address = obj.adresses;
-      info = obj.infos;
-      console.log("Данные JSON переданны в переменные");
+// const autoReadJsonFile = (file) => {
+//   fs.readJson(file, (err, obj) => {
+//     if (err) {
+//       console.error(err);
+//       plaingNow = false;
+//     } else {
+//       allMedias = obj.blocks;
+//       address = obj.adresses;
+//       info = obj.infos;
+//       console.log("Данные JSON переданны в переменные");
 
-      if (allMedias) {
-        console.log("MEDIAS ", allMedias);
-        autoContainFiles(allMedias);
-        autoDownLoadInfoImage();
-      } else {
-        console.log("MEDIAS NONE");
-        rs = true;
-      }
-    }
-  });
-};
+//       if (allMedias) {
+//         console.log("MEDIAS ", allMedias);
+//         autoContainFiles(allMedias);
+//         autoDownLoadInfoImage();
+//       } else {
+//         console.log("MEDIAS NONE");
+//         rs = true;
+//       }
+//     }
+//   });
+// };
 
-const autoContainFiles = (medias) => {
-  filesForDownload = [];
-  if (medias) {
-    let length = medias.length;
-    for (let i = 0; i < length; i++) {
-      let m = medias[i];
-      let lenBlock = m.videos.length;
-      for (let y = 0; y < lenBlock; y++) {
-        filesForDownload.push({
-          file: host + m.videos[y].file,
-          name: m.videos[y].title.toLowerCase() + "-" + y,
-        });
-        m.numMedia = 0;
-        let video = m.videos[y];
-        let title = video.title.toLowerCase() + "-" + y;
-        let len = video.file.split(".").length;
-        let ext = video.file.split(".")[len - 1];
-        medias[i].videos[y].localfile = mediafolder + "/" + title + "." + ext;
-      }
-    }
-    console.log("Список Файлов для скачивания: ", filesForDownload);
-    // playVideo(medias);
-  } else {
-    console.log("Файлы не собрались");
-    setTimeout(() => {
-      autoContainFiles(allMedias);
-    }, 30000);
-  }
-};
+// const autoContainFiles = (medias) => {
+//   filesForDownload = [];
+//   if (medias) {
+//     let length = medias.length;
+//     for (let i = 0; i < length; i++) {
+//       let m = medias[i];
+//       let lenBlock = m.videos.length;
+//       for (let y = 0; y < lenBlock; y++) {
+//         filesForDownload.push({
+//           file: host + m.videos[y].file,
+//           name: m.videos[y].title.toLowerCase() + "-" + y,
+//         });
+//         m.numMedia = 0;
+//         let video = m.videos[y];
+//         let title = video.title.toLowerCase() + "-" + y;
+//         let len = video.file.split(".").length;
+//         let ext = video.file.split(".")[len - 1];
+//         medias[i].videos[y].localfile = mediafolder + "/" + title + "." + ext;
+//       }
+//     }
+//     console.log("Список Файлов для скачивания: ", filesForDownload);
+//     // playVideo(medias);
+//   } else {
+//     console.log("Файлы не собрались");
+//     setTimeout(() => {
+//       autoContainFiles(allMedias);
+//     }, 30000);
+//   }
+// };
 
-const autoDownLoadInfoImage = async () => {
-  let length = info.length;
-  for (let i = 0; i < length; i++) {
-    let len = info[i].file.split(".").length;
-    let ext = info[i].file.split(".")[len - 1];
-    let localfile = dirInfo + "/" + i + "." + ext;
-    info[i].localfile = localfile;
-  }
-};
+// const autoDownLoadInfoImage = async () => {
+//   let length = info.length;
+//   for (let i = 0; i < length; i++) {
+//     let len = info[i].file.split(".").length;
+//     let ext = info[i].file.split(".")[len - 1];
+//     let localfile = dirInfo + "/" + i + "." + ext;
+//     info[i].localfile = localfile;
+//   }
+// };
 
-setInterval(() => {
-  if (navigator.onLine && isDownloading == false) {
-    autoFetchData(URL);
-  }
-}, 3600000);
+// setInterval(() => {
+//   if (navigator.onLine && isDownloading == false) {
+//     autoFetchData(URL);
+//   }
+// }, 3600000);
