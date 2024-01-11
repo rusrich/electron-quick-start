@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    /* width: 100%; */
 }
 
 body {
@@ -1041,5 +1042,71 @@ video {
 
     to {
         opacity: 0.6;
+    }
+}
+
+
+#sz {
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 640px;
+    overflow: hidden;
+}
+
+#sz_player {
+    position: absolute;
+    left: 0;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+    border-radius: 15px;
+}
+
+#sz video {
+    border-radius: 15px;
+}
+
+#sz_info {
+    width: 250px
+}
+
+.sz_fadein {
+    animation: scalefadein 1s 1 ease-out forwards;
+}
+
+.sz_fadeout {
+    animation: scalefadeout 1s 1 ease-out forwards;
+}
+
+
+@keyframes scalefadein {
+    from {
+        opacity: 0;
+        transform: scale(0.1)
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.05)
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1)
+    }
+}
+
+@keyframes scalefadeout {
+    from {
+        opacity: 1;
+        transform: scale(1)
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(0)
     }
 }

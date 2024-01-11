@@ -7,10 +7,10 @@ const fs = require("fs-extra");
 const fsold = require("fs");
 const axios = require("axios");
 
-// const FULLWIDTH = 896;
-// const FULLHEIGHT = 640;
-// let VIDEOWIDTH = 640;
-// let VIDEOHEIGHT = 640;
+const FULLWIDTH = 896;
+const FULLHEIGHT = 640;
+let VIDEOWIDTH = 640;
+let VIDEOHEIGHT = 640;
 
 const placePlayer = document.querySelector("#player");
 
@@ -375,6 +375,7 @@ const mediaPlayerStyle = () => {
   mediaPlayer.style.transition = "all 0.25s ease";
   mediaPlayer.muted = true;
   mediaPlayer.left = 0;
+  mediaPlayer.visibility = 'hidden'
 };
 
 const numMedia = (medias) => {

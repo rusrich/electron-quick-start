@@ -22,12 +22,12 @@ function createWindow () {
   const mainColor = '#000'
 
   // and load the index.html of the app.
-  // mainWindow.loadFile('index.html')
+  mainWindow.loadFile('index.html')
   // mainWindow.loadFile('index_1_plus_1.html')
   // mainWindow.loadFile('index_3d_shym.html')
   // mainWindow.loadFile('index_trc.html')
   // mainWindow.loadFile('index_trc_h.html')
-  mainWindow.loadFile('index_2led.html')
+  // mainWindow.loadFile('index_2led.html')
   // mainWindow.loadFile('index_medeo_f.html')
   // mainWindow.loadFile('index_shym_res.html')
   // mainWindow.loadFile('index_medeo_flag.html')
